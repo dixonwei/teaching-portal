@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>阿郎老师的教学材料 · AILGNS 独立教学工具</title>
+<style>:root{--bg:#050505;--panel:rgba(8,12,8,.86);--panel2:#080b08;--line:#1f3a1f;--text:#f8fafc;--muted:#9ca3af;--brand:#87DB00;--brand2:#B6FF3B;--amber:#fbbf24;--danger:#f87171}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);font-family:Inter,"Microsoft YaHei",system-ui,sans-serif;background:radial-gradient(circle at 85% 0%,rgba(135,219,0,.18),transparent 34%),radial-gradient(circle at 10% 8%,rgba(34,197,94,.12),transparent 28%),linear-gradient(180deg,#050505 0,#0a0d09 42%,#050505 100%);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(135,219,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(135,219,0,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.75),transparent 80%);mask-image:linear-gradient(180deg,rgba(0,0,0,.75),transparent 80%)}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:26px 18px 60px}
+a{color:var(--brand2)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:26px;margin:0 0 8px;color:#fff}
+.sub{color:var(--muted);font-size:14px;line-height:1.7}
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(135,219,0,.42);background:rgba(135,219,0,.08);color:var(--brand2);border-radius:999px;padding:9px 14px;font-size:13px;font-weight:800}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 18px;padding:6px;background:rgba(8,12,8,.86);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 34px rgba(0,0,0,.35)}
+.tab{border:0;border-radius:10px;padding:11px 18px;background:transparent;color:var(--muted);font-weight:800;cursor:pointer;font-family:inherit}
+.tab.on{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#061006}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 18px 45px rgba(0,0,0,.32);backdrop-filter:blur(10px)}
+.panel[hidden]{display:none}
+.row{display:grid;grid-template-columns:1.05fr 1fr;gap:18px}
+h2{font-size:18px;margin:0 0 10px;color:#fff}
+.note{color:var(--muted);font-size:13px;line-height:1.8}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button.btn{border:0;border-radius:11px;padding:11px 16px;font-weight:800;cursor:pointer;font-family:inherit;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#061006}
+button.btn.ghost{background:rgba(8,12,8,.9);color:#c7f9a6;border:1px solid rgba(135,219,0,.28)}
+button.btn.red{background:#dc2626;color:#fff}
+button.btn:disabled{opacity:.45;cursor:not-allowed}
+input,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;font-size:14px;outline:none;font-family:inherit;background:#080b08;color:#fff}
+input::placeholder,textarea::placeholder{color:#6b7280}
+input:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(135,219,0,.12)}
+.lines{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.32)}
+.line{display:flex;justify-content:space-between;gap:16px;padding:12px 14px;border-bottom:1px solid rgba(135,219,0,.12);font-size:14px}
+.line:last-child{border-bottom:0}
+.line b{font-weight:800;color:var(--brand2);text-align:right}
+.line .lab{color:#a7b0a7}
+.log{background:#020403;color:#b6ff3b;border:1px solid rgba(135,219,0,.18);border-radius:12px;padding:12px;min-height:110px;max-height:320px;overflow:auto;font:12px/1.7 Consolas,monospace;white-space:pre-wrap;margin-top:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.warn{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);color:#fde68a;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.8;margin-top:12px}
+.lock{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:9px;font-size:13px;line-height:1.8;background:rgba(0,0,0,.34);color:#e5e7eb}
+.ok{color:#b6ff3b;font-weight:800}.bad{color:#f87171;font-weight:800}
+.lvbar{display:flex;align-items:center;gap:10px;font-size:12.5px;margin:5px 0}.lvbar .lvn{width:104px;color:#9ca3af;flex:0 0 auto}.lvbar .lvtrack{flex:1 1 auto;height:9px;border-radius:99px;background:rgba(135,219,0,.10);overflow:hidden}.lvbar .lvfill{display:block;height:100%;background:linear-gradient(90deg,#87DB00,#B6FF3B)}.lvbar em{width:56px;text-align:right;font-style:normal;color:#B6FF3B;font-weight:800;flex:0 0 auto}
+.biggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.bigcard{background:rgba(135,219,0,.06);border:1px solid rgba(135,219,0,.22);border-radius:13px;padding:12px 14px}.bigcard span{display:block;font-size:12px;color:#9ca3af}.bigcard b{display:block;font-size:21px;color:#B6FF3B;margin-top:5px;font-variant-numeric:tabular-nums;line-height:1.25}.fold{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:rgba(0,0,0,.25)}.fold>summary{cursor:pointer;font-weight:800;color:#c7f9a6;font-size:13.5px}.fold[open]>summary{margin-bottom:8px}
+.plevel-table{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:rgba(0,0,0,.25)}.prow{display:grid;grid-template-columns:64px 170px 1fr;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(135,219,0,.12);font-size:13px;align-items:center}.prow:last-child{border-bottom:0}.prow b{color:#B6FF3B}.prow.phead{background:rgba(135,219,0,.08);color:#9ca3af;font-weight:800;font-size:12px}.prow span{color:#cbd5e1}
+@media(max-width:760px){.biggrid{grid-template-columns:repeat(2,1fr)}.row,.grid2{grid-template-columns:1fr}h1{font-size:22px}}</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1>阿郎老师的教学材料 · AILGNS 独立教学工具</h1>
+      <div class="sub">AWAKE HELIX · Turbine / AiLGNS · Anubis RPC 链上直读<br>官方 DApp：<a href="https://awakehelix.io/#/overview" target="_blank" rel="noopener">awakehelix.io</a></div>
+    </div>
+    <div class="pill">链上只读 + 钱包签名执行</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-tab="query">资产查询</button>
+    <button class="tab" data-tab="exec">提取操作</button>
+    <button class="tab" data-tab="records">交易记录</button>
+    <button class="tab" data-tab="team">团队战报</button>
+    <button class="tab" data-tab="all">全资产</button>
+  </div>
+
+  <section id="panel-query" class="panel">
+    <div class="row">
+      <div>
+        <h2>查询账户</h2>
+        <div class="note">可直接输入地址查询；连接钱包后会自动读取自己的数据。</div>
+        <div style="margin-top:14px"><input id="addr" placeholder="0x… 输入要查询的钱包地址"></div>
+        <div class="actions">
+          <button class="btn" id="btnConnect">连接钱包</button>
+          <button class="btn ghost" id="btnQuery">一键查询</button>
+        </div>
+        <div class="warn">数据读取自 Anubis RPC：<span id="rpcState">未连接</span>。查询不签名、不花费 Gas。</div>
+      </div>
+      <div>
+        <h2>资产概览</h2>
+        <div class="lines">
+          <div class="line"><span class="lab">AiLGNS 余额</span><b id="vAilgns">--</b></div>
+          <div class="line"><span class="lab">Turbine 已入账待领</span><b id="vClaimed">--</b></div>
+          <div class="line"><span class="lab">Turbine 锁仓中</span><b id="vLocked">--</b></div>
+          <div class="line"><span class="lab">Turbine 当前可领</span><b id="vClaimable">--</b></div>
+          <div class="line"><span class="lab">Turbine 锁仓数量</span><b id="vLockCount">--</b></div>
+        </div>
+        <h2 style="margin-top:18px">锁仓明细</h2>
+        <div id="lockList" class="note">（尚未查询）</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-exec" class="panel" hidden>
+    <div class="row">
+      <div>
+        <h2>1. 激活 Turbine</h2>
+        <div class="note">activate(amount, maxDaiIn, deadline)：支付 DAI，激活并得到 AiLGNS。</div>
+        <div style="margin-top:12px"><input id="actAmount" placeholder="AiLGNS 数量，例如 0.025068746"></div>
+        <div style="margin-top:10px"><input id="actMaxDai" placeholder="最多支付 DAI（点报价自动计算）"></div>
+        <div class="actions">
+          <button class="btn ghost" id="btnQuote">计算所需 DAI</button>
+          <button class="btn ghost" id="btnApprove">授权 DAI</button>
+          <button class="btn ghost" id="btnSimActivate">模拟激活</button>
+          <button class="btn" id="btnActivate">执行激活</button>
+        </div>
+      </div>
+      <div>
+        <h2>2. 领取解锁的 AiLGNS</h2>
+        <div class="note">claimUnlocked(ids)：领取已经解锁的 AiLGNS。多个编号用逗号分隔。</div>
+        <div style="margin-top:12px"><input id="claimIds" placeholder="锁仓编号，例如 0 或 0,1,2"></div>
+        <div class="actions">
+          <button class="btn ghost" id="btnSimClaim">模拟领取</button>
+          <button class="btn" id="btnClaim">执行领取</button>
+        </div>
+        <div class="warn">所有操作都先模拟，再弹钱包签名。请自行核对接收方和 calldata。</div>
+      </div>
+    </div>
+    <div id="execLog" class="log">等待操作…</div>
+  </section>
+
+  <section id="panel-records" class="panel" hidden>
+    <h2>交易记录</h2>
+    <div class="note">本地记录本次页面广播的交易哈希，刷新页面后清空。</div>
+    <div id="recordList" class="log">（暂无记录）</div>
+  </section>
+  <section id="panel-team" class="panel" hidden>
+    <h2>团队战报</h2>
+    <div class="note">输入钱包地址，查看团队规模、等级和成员。数据来自 Anubis 链上社区合约 + 官方社区接口，<b>只读、不签名</b>。</div>
+    <div class="grid2" style="margin-top:14px">
+      <input id="teamAddr" placeholder="0x… 要查询的钱包地址">
+      <div class="actions" style="margin:0">
+        <button class="btn" id="btnTeam">查询团队战报</button>
+        <select id="teamWin" style="padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#080b08;color:#fff;font-family:inherit">
+          <option value="1">链上核对：最近 1 天</option>
+          <option value="3">链上核对：最近 3 天</option>
+          <option value="7">链上核对：最近 7 天</option>
+        </select>
+        <button class="btn ghost" id="btnTeamChain">链上日志核对</button>
+      </div>
+    </div>
+    <div id="teamState" class="warn" style="margin-top:12px">尚未查询。填好地址后点「查询团队战报」。</div>
+    <div class="biggrid">
+      <div class="bigcard"><span>团队总人数</span><b id="mTeam">—</b></div>
+      <div class="bigcard"><span>直推人数</span><b id="mDirect">—</b></div>
+      <div class="bigcard"><span>P 等级</span><b id="mLevel">—</b></div>
+      <div class="bigcard"><span>层级</span><b id="mDepth">—</b></div>
+      <div class="bigcard"><span>本人创世共建</span><b id="mSelf">—</b></div>
+      <div class="bigcard"><span>团队创世共建</span><b id="mGenesis">—</b></div>
+    </div>
+    <h2 style="margin-top:20px">P 等级（官方评估）</h2>
+    <div id="pLevel" class="note">—</div>
+    <h2 style="margin-top:20px">各支线有效算力（链上直读）</h2>
+    <div id="teamLevel" class="note">—</div>
+    <h2 style="margin-top:20px">P1–P7 官方晋级门槛</h2>
+    <div class="plevel-table" id="pTable"></div>
+    <h2 style="margin-top:20px">团队成员</h2>
+    <div id="teamRefs" class="note">—</div>
+    <details class="fold"><summary>更多详情（加入时间 / 推荐人 / 区块进度）</summary><div id="teamExtra" class="lines" style="margin-top:10px"><div class="line"><span class="lab">—</span><b>—</b></div></div></details>
+    <details class="fold"><summary>链上日志核对</summary><div id="teamChain" class="note" style="margin-top:10px">—</div></details>
+    <details class="fold"><summary>操作日志</summary><div id="teamLog" class="log" style="margin-top:10px">等待操作…</div></details>
+  </section>
+
+</div>
+
+  <section id="panel-all" class="panel" hidden>
+    <h2>AiLGNS 生态 · 全资产一键查询</h2>
+    <div class="note">输入钱包地址，一次读出它在 AiLGNS（AWAKE HELIX）生态里的全部资产。<b>只读，不签名、不花 Gas。</b></div>
+    <div class="grid2" style="margin-top:14px">
+      <input id="allAddr" placeholder="0x… 输入要查询的钱包地址">
+      <div class="actions" style="margin:0">
+        <button class="btn" id="btnAll">一键查询全部</button>
+        <button class="btn ghost" id="btnAllContracts">查看生态合约清单</button>
+      </div>
+    </div>
+    <div id="allState" class="warn" style="margin-top:12px">尚未查询。</div>
+    <div class="grid2" style="margin-top:16px">
+      <div><h2>代币余额</h2><div class="lines" id="allTokens"><div class="line"><span class="lab">—</span><b>—</b></div></div></div>
+      <div><h2>Turbine 涡轮</h2><div class="lines" id="allTurbine"><div class="line"><span class="lab">—</span><b>—</b></div></div></div>
+    </div>
+    <h2 style="margin-top:18px">其它模块</h2>
+    <div class="lines" id="allOthers"><div class="line"><span class="lab">—</span><b>—</b></div></div>
+    <h2 style="margin-top:18px">生态合约清单（AiLGNS / AWAKE HELIX）</h2>
+    <div id="allContracts" class="note">点上面「查看生态合约清单」加载。</div>
+    <div id="allLog" class="log">等待操作…</div>
+  </section>
+
+<script src="ethers.umd.min.js"></script>
+<script>
+const RPC_LIST=['https://rpc2.anubispace.org','https://rpc.anubispace.org'];
+const CHAIN={chainId:'0x1A3A',chainName:'ANUBIS',rpcUrls:['https://rpc2.anubispace.org'],nativeCurrency:{name:'DAI',symbol:'DAI',decimals:18},blockExplorerUrls:['https://browser.anubispace.org']};
+const AILGNS='0x256EdB652db43E721EC6A12B6b51b6967D3bb8cB';
+const TURBINE='0xE884A336550a4482Ca6A17A3F93aa30Ed4eD9BaD';
+const DAI='0x83fd06F0846d9D90B3016bF670Efe2E0B11cDe14';
+const ERC20=new ethers.Interface(['function balanceOf(address) view returns(uint256)','function allowance(address,address) view returns(uint256)','function approve(address,uint256) returns(bool)']);
+const TURBINE_IFACE=new ethers.Interface([
+'function quote(uint256 amount) view returns(uint256 daiForBuy,uint256 fee,uint256 total)',
+'function feeBps() view returns(uint256)','function burnBps() view returns(uint256)','function lockSeconds() view returns(uint256)',
+'function claimedBalance(address user) view returns(uint256)','function lockCount() view returns(uint256)','function locksOf(address user) view returns(uint256[])','function lockOf(uint256 id) view returns(address owner,uint256 amount,uint256 unlockAt,bool claimed)','function lockedBalanceOf(address user) view returns(uint256 locked)','function claimableOf(address user) view returns(uint256 claimable)',
+'function activate(uint256 amount,uint256 maxDaiIn,uint256 deadline) returns(uint256 lockId)','function claimUnlocked(uint256[] ids)'
+]);
+const ZERO='0x0000000000000000000000000000000000000000';
+let rpc=0,provider=null,signer=null,user='',records=[];
+const $=id=>document.getElementById(id);
+function log(s){$('execLog').textContent+= '\n['+new Date().toLocaleTimeString()+'] '+s;}
+function status(s,ok){$('rpcState').textContent=s;$('rpcState').className=ok?'ok':'bad';}
+function fmt(raw,dec=18,digits=6){try{return Number(ethers.formatUnits(raw,dec)).toLocaleString('zh-CN',{maximumFractionDigits:digits})}catch(e){return String(raw)}}
+async function ethRpc(method,params){let last;for(let i=0;i<RPC_LIST.length;i++){const u=RPC_LIST[(rpc+i)%RPC_LIST.length];try{const r=await fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});const j=await r.json();if(j.error)throw new Error(j.error.message);rpc=(rpc+i)%RPC_LIST.length;return j.result}catch(e){last=e}}throw last}
+async function ethCall(to,data,from){return ethRpc('eth_call',[{from:from||ZERO,to,data},'latest'])}
+async function read(fn,args,addr,from){const data=TURBINE_IFACE.encodeFunctionData(fn,args||[]);const raw=await ethCall(addr||TURBINE,data,from);return TURBINE_IFACE.decodeFunctionResult(fn,raw)}
+async function balanceOf(token,addr){return ERC20.decodeFunctionResult('balanceOf',await ethCall(token,ERC20.encodeFunctionData('balanceOf',[addr]),addr))[0]}
+async function allowance(token,owner,spender){return ERC20.decodeFunctionResult('allowance',await ethCall(token,ERC20.encodeFunctionData('allowance',[owner,spender]),owner))[0]}
+function renderLocks(ids,locks){const el=$('lockList');if(!ids.length){el.textContent='没有 Turbine 锁仓';return}el.innerHTML=ids.map((id,i)=>{const l=locks[i];if(!l)return '<div class="lock">锁仓 #'+id+'：读取失败</div>';const t=Number(l.unlockAt)*1000;return '<div class="lock"><b>锁仓 #'+id+'</b> ｜ 数量 '+fmt(l.amount)+' AiLGNS ｜ '+(l.claimed?'<span class="ok">已领取</span>':'<span class="bad">未领取</span>')+'<br>解锁时间：'+(t?new Date(t).toLocaleString('zh-CN'):'--')+'</div>'}).join('')}
+async function query(){try{let a=$('addr').value.trim();if(user&&!a)a=user;if(!/^0x[0-9a-fA-F]{40}$/.test(a))throw new Error('地址格式不正确');$('addr').value=a;status('查询中…',true);const [ab,claimed,locked,claimable,cnt,ids]=await Promise.all([balanceOf(AILGNS,a),read('claimedBalance',[a]),read('lockedBalanceOf',[a]),read('claimableOf',[a]),read('lockCount',[]),read('locksOf',[a])]);const idArr=Array.from(ids[0]||[]);const locks=await Promise.all(idArr.map(id=>read('lockOf',[id]).then(r=>({owner:r.owner,amount:r.amount,unlockAt:r.unlockAt,claimed:r.claimed})).catch(()=>null)));$('vAilgns').textContent=fmt(ab)+' AiLGNS';$('vClaimed').textContent=fmt(claimed[0])+' AiLGNS';$('vLocked').textContent=fmt(locked[0])+' AiLGNS';$('vClaimable').textContent=fmt(claimable[0])+' AiLGNS';$('vLockCount').textContent=String(idArr.length);renderLocks(idArr,locks);status('RPC 正常',true)}catch(e){status('查询失败',false);alert('查询失败：'+(e.message||e))}}
+async function connect(){try{const eth=window.okxwallet||window.ethereum;if(!eth)throw new Error('未检测到钱包扩展');try{await eth.request({method:'wallet_addEthereumChain',params:[CHAIN]})}catch(e){}const acc=await eth.request({method:'eth_requestAccounts'});user=acc[0];$('addr').value=user;provider=new ethers.BrowserProvider(eth);signer=await provider.getSigner();status('已连接 '+user.slice(0,6)+'…'+user.slice(-4),true);await query()}catch(e){status('连接失败',false);alert(e.message||e)}}
+async function quote(){try{const amt=ethers.parseUnits($('actAmount').value.trim(),18);const q=await read('quote',[amt]);const total=q.total;const max=(total*10100n+9999n)/10000n;$('actMaxDai').value=ethers.formatUnits(max,18);log('报价：预计 DAI 买入 '+ethers.formatUnits(q.daiForBuy,18)+'，费用 '+ethers.formatUnits(q.fee,18)+'，总计 '+ethers.formatUnits(total,18)+'；maxDaiIn='+ethers.formatUnits(max,18))}catch(e){alert('报价失败：'+(e.message||e))}}
+function activateData(){const amt=ethers.parseUnits($('actAmount').value.trim(),18);const max=ethers.parseUnits($('actMaxDai').value.trim(),18);const deadline=BigInt(Math.floor(Date.now()/1000)+1800);return TURBINE_IFACE.encodeFunctionData('activate',[amt,max,deadline])}
+async function simActivate(){try{if(!user)throw new Error('请先连接钱包');const data=activateData();await ethCall(TURBINE,data,user);log('激活模拟通过')}catch(e){log('激活模拟失败：'+(e.message||e));alert('模拟失败：'+(e.message||e))}}
+async function approveDai(){try{if(!signer)throw new Error('请先连接钱包');const c=new ethers.Contract(DAI,['function approve(address,uint256) returns(bool)'],signer);const tx=await c.approve(TURBINE,ethers.MaxUint256);log('授权 DAI 已广播：'+tx.hash);await tx.wait();records.push({time:new Date().toLocaleString(),type:'授权 DAI',hash:tx.hash});renderRecords();log('授权 DAI 确认成功')}catch(e){log('授权失败：'+(e.message||e));alert(e.message||e)}}
+async function sendActivate(){try{if(!signer)throw new Error('请先连接钱包');const data=activateData();await ethCall(TURBINE,data,user);const tx=await signer.sendTransaction({to:TURBINE,data});log('激活已广播：'+tx.hash);records.push({time:new Date().toLocaleString(),type:'Turbine activate',hash:tx.hash});renderRecords();await tx.wait();log('激活确认成功')}catch(e){log('激活失败：'+(e.message||e));alert(e.message||e)}}
+function claimData(){const ids=$('claimIds').value.split(',').map(s=>s.trim()).filter(Boolean).map(s=>BigInt(s));if(!ids.length)throw new Error('请填写锁仓编号');return TURBINE_IFACE.encodeFunctionData('claimUnlocked',[ids])}
+async function simClaim(){try{if(!user)throw new Error('请先连接钱包');await ethCall(TURBINE,claimData(),user);log('领取模拟通过')}catch(e){log('领取模拟失败：'+(e.message||e));alert('模拟失败：'+(e.message||e))}}
+async function sendClaim(){try{if(!signer)throw new Error('请先连接钱包');const data=claimData();await ethCall(TURBINE,data,user);const tx=await signer.sendTransaction({to:TURBINE,data});log('领取已广播：'+tx.hash);records.push({time:new Date().toLocaleString(),type:'claimUnlocked',hash:tx.hash});renderRecords();await tx.wait();log('领取确认成功')}catch(e){log('领取失败：'+(e.message||e));alert(e.message||e)}}
+function renderRecords(){$('recordList').textContent=records.length?records.map(r=>r.time+' ｜ '+r.type+' ｜ '+r.hash).join('\n'):'（暂无记录）'}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));['query','exec','records','team','all'].forEach(k=>$('panel-'+k).hidden=(k!==b.dataset.tab))});
+$('btnConnect').onclick=connect;$('btnQuery').onclick=query;$('btnQuote').onclick=quote;$('btnApprove').onclick=approveDai;$('btnSimActivate').onclick=simActivate;$('btnActivate').onclick=sendActivate;$('btnSimClaim').onclick=simClaim;$('btnClaim').onclick=sendClaim;
+log('页面已加载。RPC：'+RPC_LIST.join(' / '));
+
+/* ================= 团队战报（Anubis 链上社区关系） ================= */
+const COM_ADDR='0xc9f9a8a2dBf8188AD6610e0239105CAbE67c4993';
+const FUND_ADDR='0x030590921E9841e1d2104642ED285C83B5F0ddB5';
+const JOINED_TOPIC='0xd12045cbb824dccd3bf8edffc06c251eca57b57aa8af4b78ab2f2653007c808c';
+const SUB_TOPIC='0xbf2cb660fb44e162e3b577d189cc3329e664c15770f029db53e08538b6192d5c';
+const GENESIS_FROM=13850000, GENESIS_TO=14500000;
+const IDX_BASES=(location.protocol==='http:'||location.protocol==='https:')?[location.origin+'/idx','https://ailgns.ai']:['https://ailgns.ai'];
+let IDX_BASE=null;
+const BLOCKS_PER_DAY=86400, MAX_RANGE=5000;
+let teamMember=null;
+
+const $t=id=>document.getElementById(id);
+function tLog(s){const el=$t('teamLog');if(el)el.textContent+='\n['+new Date().toLocaleTimeString()+'] '+s}
+function tState(h){$t('teamState').innerHTML=h}
+function padA(a){return '0x000000000000000000000000'+a.toLowerCase().replace(/^0x/,'')}
+function shortA(a){return a?a.slice(0,6)+'…'+a.slice(-4):'—'}
+function tsFmt(sec){return new Date(sec*1000).toLocaleString('zh-CN')}
+function daiFmt(wei){const n=Number(wei)/1e18;return n.toLocaleString('zh-CN',{maximumFractionDigits:4})}
+function tLine(lab,val){return '<div class="line"><span class="lab">'+lab+'</span><b>'+val+'</b></div>'}
+function tBox(h){return '<div class="lock">'+h+'</div>'}
+function expBlock(b){return 'https://browser.anubispace.org/block/'+b}
+function expTx(h){return 'https://browser.anubispace.org/tx/'+h}
+function expAddr(a){return 'https://browser.anubispace.org/address/'+a}
+
+async function idxGet(p){
+  const bases=IDX_BASE?[IDX_BASE]:IDX_BASES;
+  let err=null;
+  for(const b of bases){
+    try{
+      const r=await fetch(b+p,{headers:{accept:'application/json'}});
+      let j=null;try{j=await r.json()}catch(e){}
+      if(!r.ok||!j||j.error)throw new Error((j&&j.error)||('HTTP '+r.status));
+      IDX_BASE=b;return j;
+    }catch(e){err=e}
+  }
+  throw new Error((err&&err.message||'请求失败')+' ｜ 如果是浏览器跨域限制，请改用 http://localhost:8090/ailgns-tool-mobile.html 打开本页');
+}
+async function rpcPost(method,params){
+  let last=null;
+  for(let i=0;i<4;i++){
+    const url=RPC_LIST[(rpc+i)%RPC_LIST.length];
+    try{
+      const r=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:method,params:params})});
+      const j=await r.json();
+      if(j.error)throw new Error(j.error.message);
+      if(i)rpc++;
+      return j.result;
+    }catch(e){last=e;rpc++;await new Promise(s=>setTimeout(s,400))}
+  }
+  throw last||new Error('RPC 不可用');
+}
+async function scanLogs(address,topics,from,to,onTick){
+  const tasks=[];for(let f=from;f<=to;f+=MAX_RANGE)tasks.push([f,Math.min(f+MAX_RANGE-1,to)]);
+  const out=[];let i=0,done=0;
+  const worker=async()=>{
+    while(i<tasks.length){
+      const t=tasks[i++];
+      const res=await rpcPost('eth_getLogs',[{address:address,topics:topics,fromBlock:'0x'+t[0].toString(16),toBlock:'0x'+t[1].toString(16)}]);
+      for(const l of res)out.push({block:parseInt(l.blockNumber,16),addr:l.address,topics:l.topics,data:l.data,tx:l.transactionHash});
+      done++;if(onTick)onTick(done,tasks.length);
+    }
+  };
+  await Promise.all(Array.from({length:8},()=>worker()));
+  return out;
+}
+function addrFromTopic(t){return t?('0x'+t.slice(26)):null}
+
+async function teamQuery(){
+  const a=$t('teamAddr').value.trim().toLowerCase();
+  if(!/^0x[0-9a-f]{40}$/.test(a)){$t('teamState').innerHTML='⚠️ 请输入正确的钱包地址（0x 开头 + 40 位十六进制）';return}
+  tState('查询中…');$t('teamLog').textContent='';
+  try{
+    const m=await idxGet('/api/v1/members/'+a);
+    const mm=m.data.member;teamMember=mm;
+    const c=await idxGet('/api/v1/address/'+a+'/community');
+    const head=parseInt(await rpcPost('eth_blockNumber',[]),16);
+    const meLv=await ocrosLevel(a);
+    $t('mTeam').textContent=mm.teamSize;
+    $t('mDirect').textContent=mm.directCount;
+    $t('mLevel').textContent='读取中…';
+    $t('mDepth').textContent=(c.data.level>0?('第 '+c.data.level+' 层'):'未加入');
+    $t('mSelf').textContent=daiFmt(mm.genesisDai)+' DAI';
+    $t('mGenesis').textContent=daiFmt(mm.teamGenesisDai)+' DAI';
+    $t('teamExtra').innerHTML=
+      tLine('加入时间',tsFmt(mm.joinedAt))+
+      tLine('加入区块','#'+mm.joinedBlock.toLocaleString('en-US'))+
+      tLine('推荐人（上级）',shortA(mm.referrer))+
+      tLine('是否迁移导入',mm.imported?'是（Polygon 迁移）':'否')+
+      tLine('创世记录数',mm.genesisRecords)+
+      tLine('索引已同步','#'+m.indexedBlock.toLocaleString('en-US'))+
+      tLine('链上最新','#'+head.toLocaleString('en-US'));
+    tLog('团队概况：团队 '+mm.teamSize+' 人 / 直推 '+mm.directCount+' 人 / 层级 '+(c.data.level||0));
+    const refs=await idxGet('/api/v1/address/'+a+'/referrals?start=0&count=100');
+    await loadPLevel(a);
+    await loadTeamLevels(a, refs.data.items);
+    $t('teamState').innerHTML='✅ 查询完成。团队 '+mm.teamSize+' 人，直推 '+mm.directCount+' 人。';
+  }catch(e){tState('❌ 查询失败：'+(e.message||e));tLog('查询失败：'+(e.message||e))}
+}
+async function teamChainCheck(){
+  const a=$t('teamAddr').value.trim().toLowerCase();
+  if(!/^0x[0-9a-f]{40}$/.test(a)){$t('teamState').innerHTML='⚠️ 请先填写地址';return}
+  const days=Number($t('teamWin').value||1);
+  $t('teamChain').innerHTML='<div class="lock">扫描中…（区块日志每次最多 5000 个区块，请稍等）</div>';
+  const out=[];
+  try{
+    if(!teamMember||teamMember.address.toLowerCase()!==a){
+      const m=await idxGet('/api/v1/members/'+a);teamMember=m.data.member;
+    }
+    const mm=teamMember;
+    const head=parseInt(await rpcPost('eth_blockNumber',[]),16);
+
+    const joinLogs=await scanLogs(COM_ADDR,[JOINED_TOPIC,padA(a)],mm.joinedBlock,mm.joinedBlock);
+    if(joinLogs.length){
+      const l=joinLogs[0];
+      out.push(tBox('① 链上加入记录：区块 <a href="'+expBlock(l.block)+'" target="_blank" rel="noopener">#'+l.block+'</a> ｜ user='+shortA(addrFromTopic(l.topics[1]))+' ｜ referrer='+shortA(addrFromTopic(l.topics[2]))+' ｜ <a href="'+expTx(l.tx)+'" target="_blank" rel="noopener">交易</a><br><span class="ok">与索引服务一致 ✓</span>'));
+    }else{
+      out.push(tBox('① 链上加入记录：在区块 #'+mm.joinedBlock+' 未找到 Joined 事件 ✗（可能高度已变化）'));
+    }
+
+    const subLogs=await scanLogs(FUND_ADDR,[SUB_TOPIC,null,padA(a)],GENESIS_FROM,GENESIS_TO);
+    if(subLogs.length){
+      const s=subLogs[0];
+      const amt=BigInt(s.data.slice(0,66));
+      const ts=Number(BigInt('0x'+s.data.slice(66,130)));
+      out.push(tBox('② 链上创世共建：区块 <a href="'+expBlock(s.block)+'" target="_blank" rel="noopener">#'+s.block+'</a> ｜ '+daiFmt(amt)+' DAI ｜ '+tsFmt(ts)+' ｜ <a href="'+expTx(s.tx)+'" target="_blank" rel="noopener">交易</a><br><span class="ok">与接口里的创世共建 '+daiFmt(mm.genesisDai)+' DAI 对比 ✓</span>'));
+    }else{
+      out.push(tBox('② 链上创世共建：创世窗口 #'+GENESIS_FROM+'–'+GENESIS_TO+' 内没找到该地址的 Subscribed 事件（可能不在该窗口）'));
+    }
+
+    const from=head-days*BLOCKS_PER_DAY;
+    const all=await scanLogs(COM_ADDR,[JOINED_TOPIC],from,head,(d,t)=>$t('teamState').innerHTML='链上扫描中：'+d+' / '+t+' 个区块…');
+    const mine=all.filter(x=>addrFromTopic(x.topics[2]).toLowerCase()===a);
+    out.push(tBox('③ 最近 '+days+' 天链上全网新增成员：<b>'+all.length+'</b> 人（区块 '+from.toLocaleString('en-US')+' → '+head.toLocaleString('en-US')+'）<br>其中以本地址为推荐人的新增：<b>'+mine.length+'</b> 人'+
+      (mine.length?'<br>'+mine.map(x=>shortA(addrFromTopic(x.topics[1]))+' ｜ 区块 <a href="'+expBlock(x.block)+'" target="_blank" rel="noopener">#'+x.block+'</a>').join('<br>'):'')));
+    tState('✅ 链上核对完成（数据全部取自 Anubis RPC 的 eth_getLogs）。');
+    tLog('链上核对完成：近 '+days+' 天全网新增 '+all.length+' 人，本人直推新增 '+mine.length+' 人');
+  }catch(e){
+    tState('❌ 链上核对失败：'+(e.message||e));
+    tLog('链上核对失败：'+(e.message||e));
+  }
+  $t('teamChain').innerHTML=out.join('')||'（无结果）';
+}
+
+$t('btnTeam').onclick=teamQuery;
+$t('btnTeamChain').onclick=teamChainCheck;
+$t('teamAddr').value=$t('teamAddr').value||'';
+
+
+
+/* ================= 全资产一键查询（AiLGNS 生态） ================= */
+const HX={
+  AILGNS:['0x256EdB652db43E721EC6A12B6b51b6967D3bb8cB','AiLGNS',18],
+  LGNS:['0x4D1D808a081FdAc440703b3765FC61f8028C06B8','LGNS',9],
+  gLGNS:['0xf140a92C156e76F5A1d3D6f96284b250330F8F4c','gLGNS',18],
+  DAI:['0x83fd06F0846d9D90B3016bF670Efe2E0B11cDe14','DAI',18],
+  USDT:['0xDfb6a28BC6DC51fed17c27C880F2c66cDd040A3e','USDT',18],
+  veAiLGNS:['0x27Cb55eE75E777fF972B74B6E68782D12Bd4ec46','veAiLGNS',18],
+  LFEO:['0xA4e362201f74A9ea4f227B941026Ce6C9397C196','LFEO',18]
+};
+const NFT='0x77E6ab1C5557FD456b0656304E0e5c02a6d7DcCA';
+const CONTRACTS=[
+ ['AILGNS 代币','0x256EdB652db43E721EC6A12B6b51b6967D3bb8cB','协议核心代币，由算力排放产生'],
+ ['LGNS 代币','0x4D1D808a081FdAc440703b3765FC61f8028C06B8','底层非稳定币'],
+ ['gLGNS 代币','0xf140a92C156e76F5A1d3D6f96284b250330F8F4c','治理/权益代币，可被销毁'],
+ ['DAI','0x83fd06F0846d9D90B3016bF670Efe2E0B11cDe14','计价与结算'],
+ ['USDT','0xDfb6a28BC6DC51fed17c27C880F2c66cDd040A3e','计价与结算'],
+ ['Turbine 涡轮','0xE884A336550a4482Ca6A17A3F93aa30Ed4eD9BaD','激活/锁仓/领取 AiLGNS'],
+ ['veAiLGNS 投票锁仓','0x27Cb55eE75E777fF972B74B6E68782D12Bd4ec46','锁 AiLGNS 换投票权（同时是协议储备地址）'],
+ ['Power Ledger 算力账本','0x9E68F61E2615cc1D2C4a2D0026bFc1EBFdf68C1b','记录每个地址的算力'],
+ ['Power Ledger Lens','0x2e902f1Fe0457812e2E78940304f3891Cce5fE11','算力批量查询辅助合约'],
+ ['Epoch Clock 周期钟','0x6C5352E15A8327C3F44898FE220100Edc2989C58','协议周期计时'],
+ ['Emission Schedule 排放表','0x6AaB661E1a99B20D1Dae581Ab0e1250E6f753a19','排放节奏'],
+ ['Community Vault 社区金库','0x3DEea5f638cA0dFb03A0873CF4c0b90BA50E1aA2','社区奖励资金池'],
+ ['Protocol Reserve 协议储备','0x27Cb55eE75E777fF972B74B6E68782D12Bd4ec46','协议自有资产'],
+ ['Insurance Treasury 保险金库','0x22841307af7e663F8Ce784230C8F8e10a46888cF','风险准备金'],
+ ['Ecosystem Reserve 生态储备','0x0645460f6f485153775154451Fe1322fDbB2233c','生态激励储备'],
+ ['Community Fund 社区基金','0x616799578b7A9FCfF46B6519C2460d07fba8cfD3','社区基金'],
+ ['Fee Collector 手续费收集','0x7088e192b9b7f41A07bB3f79378e13454D8a80D5','归集协议手续费'],
+ ['Helix Router 路由','0x0527935979d10685B8571Fa02A8DEDbd6f3024E3','兑换/加池路由'],
+ ['Gauge Registry','0x8B52B9e85f7CE788c2C141Cc2eB98965C705ABB0','投票池登记'],
+ ['Gauge Voting 投票','0x81a42A20f754dBeCF7aEe69685D844a880deA618','veAiLGNS 投票'],
+ ['Gauge Vault 投票奖励库','0xDb752f219a79C8d9D6F6674e5ea295c2C5431d1F','投票奖励分发'],
+ ['Gauge LP Manager LP管理','0x5DDC8a13eaBda89593BEB885aB8b2afda26a3587','LP 与激励管理'],
+ ['Gauge Health','0xb8bc3C6b90aaDd9Aff393Ecb4297b7Fd6876f510','池子健康度'],
+ ['Production NFT','0x77E6ab1C5557FD456b0656304E0e5c02a6d7DcCA','产出/生产凭证 NFT'],
+ ['Burn NFT Factory','0xB39d8759d59592363395E4c66a3d4E4ACc9bc09D','销毁铸造 NFT'],
+ ['Oracle 预言机','0x732e959fED889626686f9Fbe57233FE32b771963','价格/状态喂价'],
+ ['Risk Controller 风控','0xB16325F0565A2d83031735a7aC6495B5Bc72E422','风险参数控制'],
+ ['Daily Settlement 每日结算','0x2e0D9D461A1B567112A9b824d939FB583853dAA7','每日结算'],
+ ['POL Vault','0x825d1B92d9cB744c9583999B6F57893E96d9B9c7','协议自有流动性'],
+ ['LFEO','0xA4e362201f74A9ea4f227B941026Ce6C9397C196','LFEO 代币'],
+ ['Anubis Fundraise 共建合约','0x030590921E9841e1d2104642ED285C83B5F0ddB5','创世共建'],
+ ['Community 社区关系','0xc9f9a8a2dBf8188AD6610e0239105CAbE67c4993','推荐关系树（团队）'],
+ ['Uniswap V2 Router','0x3E412E02B6157fBE80b6C6697f3Ce1142E629019','DEX 路由'],
+ ['Uniswap V2 Factory','0xaf6F4e641C86A25518509BC840051A8652Af598A','DEX 工厂']
+];
+const ERC20IF=new ethers.Interface(['function balanceOf(address) view returns(uint256)','function decimals() view returns(uint8)']);
+async function hjRead(to,data){const r=await fetch(RPC_LIST[rpc%RPC_LIST.length],{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to,data},'latest']})});const j=await r.json();if(j.error)throw new Error(j.error.message);return j.result}
+async function hjBal(token,who){try{const r=await hjRead(token,ERC20IF.encodeFunctionData('balanceOf',[who]));return BigInt(r)}catch(e){return null}}
+function hjLine(l,v){return '<div class="line"><span class="lab">'+l+'</span><b>'+v+'</b></div>'}
+async function queryAll(){
+  let a=document.getElementById('allAddr').value.trim();
+  if(!a){a=document.getElementById('addr').value.trim()}
+  if(!/^0x[0-9a-fA-F]{40}$/.test(a)){document.getElementById('allState').innerHTML='⚠️ 请输入正确的钱包地址';return}
+  document.getElementById('allAddr').value=a;
+  document.getElementById('allState').innerHTML='查询中…';document.getElementById('allLog').textContent='';
+  try{
+    const vals={};
+    for(const k of Object.keys(HX)){ vals[k]=await hjBal(HX[k][0],a); }
+    const nft=await hjBal(NFT,a);
+    let html='';
+    for(const k of Object.keys(HX)){
+      const v=vals[k];const d=HX[k][2];
+      const notERC20=(k==='veAiLGNS'||k==='LFEO');
+      html+=hjLine(HX[k][1], v===null?(notERC20?'（接口不同，待接入）':'（读取失败）'):(Number(v)/Math.pow(10,d)).toLocaleString('en-US',{maximumFractionDigits:6}));
+    }
+    document.getElementById('allTokens').innerHTML=html;
+    // Turbine 复用已有查询
+    document.getElementById('allTurbine').innerHTML=hjLine('读取中…','…');
+    try{
+      const tb=await balanceOf(AILGNS,a);
+      const [cl,lb,ca,cn]=await Promise.all([read('claimedBalance',[a]),read('lockedBalanceOf',[a]),read('claimableOf',[a]),read('lockCount',[])]);
+      const ids=await read('locksOf',[a]);const my=Array.from(ids[0]||[]).length;
+      document.getElementById('allTurbine').innerHTML=
+        hjLine('AiLGNS 余额',fmt(tb)+' AiLGNS')+
+        hjLine('已入账待领',fmt(cl[0])+' AiLGNS')+
+        hjLine('锁仓中',fmt(lb[0])+' AiLGNS')+
+        hjLine('当前可领',fmt(ca[0])+' AiLGNS')+
+        hjLine('我的锁仓笔数',my)+
+        hjLine('全网锁仓笔数',String(cn[0]));
+    }catch(e){document.getElementById('allTurbine').innerHTML=hjLine('读取失败',String(e.message||e).slice(0,40))}
+    document.getElementById('allOthers').innerHTML=
+      hjLine('Production NFT 数量', nft===null?'（读取失败）':Number(nft).toString())+
+      hjLine('veAiLGNS 投票锁仓','待接入（非标准 ERC20 接口）')+
+      hjLine('奖励 / 投票 / 算力','待接入（下一版）');
+    document.getElementById('allState').innerHTML='✅ 读取完成。代币余额与 Turbine 数据来自 Anubis RPC 直读。';
+    document.getElementById('allLog').textContent='查询地址：'+a+'  ｜  时间：'+new Date().toLocaleString();
+  }catch(e){document.getElementById('allState').innerHTML='❌ 查询失败：'+(e.message||e)}
+}
+function renderContracts(){
+  document.getElementById('allContracts').innerHTML=CONTRACTS.map(c=>'<div class="lock"><b>'+c[0]+'</b><br><span style="font-family:Consolas,monospace;font-size:12px">'+c[1]+'</span><br>'+c[2]+'</div>').join('');
+  document.getElementById('allLog').textContent='已列出 '+CONTRACTS.length+' 个 AiLGNS 生态合约。';
+}
+document.getElementById('btnAll').onclick=queryAll;
+document.getElementById('btnAllContracts').onclick=renderContracts;
+
+
+/* ===== P 等级诊断（官方 P1–P7：veAiLGNS 门槛 + 三区 Power） ===== */
+const DAO_NAMES=['普通','传教士','武士','骑士','信使','尊者','大师'];
+const OCROS='https://apiv2.ocros.io/api/v1';
+async function ocros(path){const r=await fetch(OCROS+path,{headers:{accept:'application/json'}});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}
+async function ocrosLevel(addr){try{const j=await ocros('/community/'+addr);return {level:Number(j.level),stake:Number(j.stake)}}catch(e){return {level:null,stake:null}}}
+function lvName(n){return (n===null||isNaN(n))?'未知':(DAO_NAMES[n]||('等级'+n))}
+const P_RULES=[
+  {p:1,ve:1000,zone:50000,zoneText:'3 个独立区域，每区 ≥ 50,000 DAI Power'},
+  {p:2,ve:3000,zone:150000,zoneText:'3 个独立区域，每区 ≥ 150,000 DAI Power'},
+  {p:3,ve:5000,zone:500000,zoneText:'3 个独立区域，每区 ≥ 500,000 DAI Power'},
+  {p:4,ve:8000,zone:1500000,zoneText:'3 个独立区域，每区 ≥ 1,500,000 DAI Power'},
+  {p:5,ve:10000,zone:4000000,zoneText:'3 个独立区域，每区 ≥ 4,000,000 DAI Power'},
+  {p:6,ve:15000,zone:null,zoneText:'3 个独立有效区域，每区至少 1 名有效 P5'},
+  {p:7,ve:20000,zone:null,zoneText:'3 个独立有效区域，每区至少 1 名有效 P6'}
+];
+function pTableHtml(){
+  let h='<div class="prow phead"><span>等级</span><span>有效 veAiLGNS 门槛</span><span>社区结构条件</span></div>';
+  P_RULES.forEach(r=>{h+='<div class="prow"><b>P'+r.p+'</b><span>'+(r.ve?r.ve.toLocaleString('en-US'):'—')+' DAI</span><span>'+r.zoneText+'</span></div>'});
+  h+='<div class="note" style="margin-top:8px">来源：官方《一张图看懂社区动态排放》。P1–P5 三区须分别达标，不能只看合计；P6–P7 同一区域多个节点不能替代三个独立区域。</div>';
+  return h;
+}
+async function loadTeamLevels(root, referrers){
+  const box=$t('teamLevel');
+  if(!box)return;
+  $t('pTable').innerHTML=pTableHtml();
+  box.innerHTML='<div class="lock">正在读取官方有效算力…</div>';
+  const out=[];
+  try{
+    const mine=await officialPower(root);
+    const list=(referrers||[]).slice(0,60);
+    let idx=0;
+    const worker=async()=>{while(idx<list.length){const x=list[idx++];out.push({address:x.address,depth:x.level,power:await officialPower(x.address)})}};
+    await Promise.all(Array.from({length:6},()=>worker()));
+    out.sort((p,q)=>(q.power||0)-(p.power||0));
+    let html='<div class="lock"><b>本人有效算力（官方口径）：'+(mine===null?'读取失败':mine.toLocaleString('en-US',{maximumFractionDigits:2})+' DAI')+'</b>　·　直推 '+out.length+' 条</div>';
+    html+='<div class="warn" style="margin-top:12px"><b>⚠️ 这里显示的是官方链上「有效算力」（PowerLedger.activePowerOf），不是 P 等级。</b><br>P1–P7 还要同时满足 <b>有效 veAiLGNS 价值门槛</b>（该合约接口读不到），且「区域 Power」指的是<b>整条支线（含全部下级）的算力合计</b>，本工具目前只能读到<b>直推那一层</b>，所以<b>不做等级判定</b>。</div>';
+    if(out.length){
+      html+='<div class="lock"><b>各直推支线的有效算力（从高到低）</b></div>';
+      html+=out.slice(0,20).map((x,i)=>{
+        return tBox('<b>'+(i+1)+'</b>　<a href="'+expAddr(x.address)+'" target="_blank" rel="noopener">'+shortA(x.address)+'</a>　层级第 '+x.depth+' 层　有效算力 <b>'+(x.power===null?'—':x.power.toLocaleString('en-US',{maximumFractionDigits:2}))+'</b> DAI');
+      }).join('');
+    }
+    html+='<div class="note" style="margin-top:10px">数据来源：Anubis 链上算力账本 0x9E68F61E…68C1b 的 activePowerOf()（官方口径，可到区块浏览器核对）。</div>';
+    $t('teamRefs').innerHTML=html;
+    tLog('有效算力读取完成：本人 '+mine+'，直推 '+out.length+' 条');
+  }catch(e){box.innerHTML='<div class="lock">有效算力读取失败：'+String(e.message||e)+'</div>'}
+  return out;
+}
+const POWER_LEDGER='0x9E68F61E2615cc1D2C4a2D0026bFc1EBFdf68C1b';
+const POWER_IF=new ethers.Interface(['function activePowerOf(address user) view returns (uint256)']);
+async function officialPower(addr){
+  try{
+    const data=POWER_IF.encodeFunctionData('activePowerOf',[addr]);
+    const r=await fetch(RPC_LIST[rpc%RPC_LIST.length],{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:POWER_LEDGER,data:data},'latest']})});
+    const j=await r.json();
+    if(j.error)throw new Error(j.error.message);
+    return Number(BigInt(j.result))/1e18;
+  }catch(e){return null}
+}
+
+/* ===== P 等级（抓取 ailgns.ai 团队页的官方评估） ===== */
+async function idxText(path){
+  const bases=IDX_BASE?[IDX_BASE]:IDX_BASES;
+  let err=null;
+  for(const b of bases){
+    try{const r=await fetch(b+path,{headers:{accept:'text/html'}});if(!r.ok)throw new Error('HTTP '+r.status);const t=await r.text();if(t.length<5000)throw new Error('页面内容不完整');IDX_BASE=b;return t}catch(e){err=e}
+  }
+  throw new Error((err&&err.message||'请求失败')+' ｜ 若提示跨域，请用 http://localhost:8090 打开本页');
+}
+function pBlock(seg,label){
+  const re=new RegExp(label+'\\s+([\\d,\\.]+)\\s+DAI\\s+(够 P\\d|离 P\\d 还差 [\\d,\\.]+ DAI)');
+  const r=seg.match(re);
+  return r?{value:r[1],status:r[2]}:null;
+}
+async function loadPLevel(addr){
+  const box=$t('pLevel');
+  if(!box)return;
+  box.innerHTML='<div class="lock">正在读取官方评估…</div>';
+  try{
+    const html=await idxText('/team/'+addr);
+    const t=html.replace(/\\"/g,String.fromCharCode(34));
+    const i=t.indexOf('官方评估：');
+    if(i<0){box.innerHTML='<div class="lock">该地址暂时没有官方评估记录（可能团队规模还没达到评估条件）。</div>';return}
+    const seg=t.slice(i,i+6000).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ');
+    const m=seg.match(/官方评估：\s*(P\d)\s*（第\s*(\d+)\s*天/);
+    const ai=seg.indexOf('官方评估：');
+    const tail=seg.slice(ai+5,ai+40);
+    const lvl=(tail.charAt(0)==='P'&&tail.charAt(1)>='0'&&tail.charAt(1)<='9')?('P'+tail.charAt(1)):'P0';
+    const d1=seg.indexOf('（第 ',ai);
+    let day='—';
+    if(d1>=0){const mday=seg.slice(d1+3).match(/[0-9]+/);if(mday)day=mday[0];}
+    $t('mLevel').textContent=lvl;
+    const rows=[['ve 持仓价值',pBlock(seg,'ve 持仓价值')],['第 1 区',pBlock(seg,'第 1 区')],['第 2 区',pBlock(seg,'第 2 区')],['第 3 区',pBlock(seg,'第 3 区')]];
+    let html2='<div class="biggrid" style="margin-top:6px">';
+    html2+=rows.map(r=>'<div class="bigcard"><span>'+r[0]+'</span><b>'+(r[1]?r[1].value+' DAI':'—')+'</b><span style="margin-top:4px;color:'+(r[1]&&r[1].status.indexOf('够')===0?'#B6FF3B':'#fbbf24')+'">'+(r[1]?r[1].status:'—')+'</span></div>').join('');
+    html2+='</div>';
+    box.innerHTML='<div class="warn" style="margin-top:4px"><b>P 等级（官方评估）：'+lvl+(lvl==='P0'?' · 未达到任何等级':'')+'（第 '+day+' 天）</b>　·　数据来自 ailgns.ai 的团队页（它按官方评估口径每天核对一次）</div>'+html2;
+    tLog('P 等级（官方评估）：'+lvl);
+  }catch(e){box.innerHTML='<div class="lock">P 等级读取失败：'+String(e.message||e)+'</div>'}
+}
+</script>
+</body>
+</html>
